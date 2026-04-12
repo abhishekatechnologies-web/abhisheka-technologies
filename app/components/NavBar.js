@@ -1,5 +1,15 @@
 'use client';
 
+/**
+ * NavBar — sticky top navigation with scroll-reactive background.
+ *
+ * Behaviour:
+ * - Transparent over the dark hero section; switches to white + border on scroll (>20px).
+ * - Mobile: animated hamburger → X toggle; full-width drawer with staggered link entries.
+ * - Body scroll is locked while the mobile drawer is open.
+ * - Framer Motion drives the hamburger bars and drawer enter/exit animations.
+ */
+
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';

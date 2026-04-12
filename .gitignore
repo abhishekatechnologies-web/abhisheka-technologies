@@ -31,6 +31,10 @@ yarn-error.log*
 # vercel
 .vercel
 
+# Claude Code project files (AI assistant tooling — not part of the project)
+.claude/
+CLAUDE.md
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

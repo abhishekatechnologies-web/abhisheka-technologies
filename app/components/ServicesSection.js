@@ -1,5 +1,20 @@
 'use client';
 
+/**
+ * ServicesSection — 6-service layout with a full-width featured card.
+ *
+ * Layout:
+ * - Row 1: 3-column grid of standard service cards (Strategy, Product, Mobile, AI, Headless).
+ * - Row 2: Full-width "Cloud & Backend Engineering" featured card with 3 grouped tech panels
+ *   (Serverless / Server-based / Infrastructure) to surface depth without listing technologies.
+ *
+ * All cards use Framer Motion StaggerReveal for scroll-triggered entrance.
+ * Hover: border transitions to Electric Blue via onMouseEnter/Leave inline styles
+ * (more reliable than Tailwind's group-hover for dynamic border colour).
+ *
+ * Icons are inline SVGs so they inherit `currentColor` and respond to Tailwind text utilities.
+ */
+
 import { Reveal, StaggerReveal, StaggerItem } from '@/app/components/ScrollReveal';
 
 const services = [

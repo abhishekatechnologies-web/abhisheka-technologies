@@ -1,5 +1,15 @@
 'use client';
 
+/**
+ * HeroClient — animated hero content rendered client-side.
+ *
+ * Extracted from the server-component page.js so Framer Motion can run in
+ * the browser. Uses a single shared `variants` map with a `custom` delay
+ * prop to stagger: label → headline → sub-copy → CTAs.
+ *
+ * The parent HeroSection supplies the dark background and scroll indicator.
+ */
+
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 

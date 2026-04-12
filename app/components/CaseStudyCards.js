@@ -1,5 +1,19 @@
 'use client';
 
+/**
+ * CaseStudyCards — responsive 3-column grid of project cards.
+ *
+ * The grid uses a single Framer Motion parent with staggered children:
+ * each CaseStudyCard fades + slides up 32px with an 80ms per-card delay.
+ * Animation triggers once when the grid scrolls into view (useInView, once: true).
+ *
+ * Data lives in the `caseStudies` array below — add new entries here and
+ * also update generateStaticParams + sitemap.js for the detail page to be built.
+ *
+ * Card anatomy: number badge · outcome badge (green dot = live product) ·
+ * title · client type · tagline · tech tags · "Read case study →" link.
+ */
+
 import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';

@@ -1,3 +1,13 @@
+/**
+ * HomePage — landing page root (server component).
+ *
+ * Assembles all landing sections in order. Interactive sections are extracted
+ * as 'use client' components and imported here; this file itself stays server-
+ * rendered for fast initial load and SSR-friendly metadata.
+ *
+ * Sections: Hero → About → Services → Case Studies → Contact
+ */
+
 import Link from 'next/link';
 import NavBar from '@/app/components/NavBar';
 import ContactForm from '@/app/components/ContactForm';

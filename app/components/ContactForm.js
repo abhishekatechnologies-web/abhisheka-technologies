@@ -1,5 +1,21 @@
 'use client';
 
+/**
+ * ContactForm — EmailJS-powered contact form with full UX polish.
+ *
+ * Flow:
+ *  1. Validate on blur (per-field) and on submit (all fields).
+ *  2. On valid submit: save to localStorage as backup, then send via EmailJS.
+ *  3. On success → animated SuccessState.
+ *  4. On failure → ErrorState with retry and direct email fallback.
+ *
+ * EmailJS template variables expected: from_name, reply_to, message, budget.
+ * Keys are read from NEXT_PUBLIC_EMAILJS_* environment variables.
+ *
+ * Budget options cover both USD and INR ranges to serve international clients.
+ * localStorage backup (at_messages) means no submission is ever silently lost.
+ */
+
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import emailjs from '@emailjs/browser';
@@ -72,10 +88,56 @@ function SuccessState() {
   );
 }
 
+function ErrorState({ onRetry }) {
+  return (
+    <motion.div
+      key="error"
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -8 }}
+      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+      className="flex flex-col items-start gap-4 py-6"
+    >
+      <div
+        className="flex items-center justify-center w-12 h-12 rounded-full"
+        style={{ backgroundColor: '#FEF2F2' }}
+      >
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M10 6v4M10 14h.01" stroke="#EF4444" strokeWidth="1.5" strokeLinecap="round" />
+          <circle cx="10" cy="10" r="8" stroke="#EF4444" strokeWidth="1.5" />
+        </svg>
+      </div>
+      <div>
+        <p className="text-base font-medium mb-1" style={{ color: '#171A20' }}>
+          Message couldn&apos;t be sent.
+        </p>
+        <p className="text-sm leading-relaxed mb-3" style={{ color: '#5C5E62' }}>
+          There was a problem with the email service. Your message has been saved — you can also
+          reach me directly at{' '}
+          <a
+            href="mailto:abhishekatechnologies@gmail.com"
+            className="underline transition-opacity hover:opacity-70"
+            style={{ color: '#3E6AE1' }}
+          >
+            abhishekatechnologies@gmail.com
+          </a>
+        </p>
+        <button
+          onClick={onRetry}
+          className="text-sm font-medium transition-opacity hover:opacity-70"
+          style={{ color: '#3E6AE1' }}
+        >
+          Try again →
+        </button>
+      </div>
+    </motion.div>
+  );
+}
+
 export default function ContactForm() {
   const [form, setForm] = useState({ name: '', email: '', message: '', budget: '' });
   const [touched, setTouched] = useState({});
-  const [status, setStatus] = useState('idle'); // idle | loading | success
+  const [status, setStatus] = useState('idle'); // idle | loading | success | error
 
   const errors = {
     name: !form.name.trim() ? 'Name is required.' : '',
@@ -109,15 +171,16 @@ export default function ContactForm() {
     try {
       await emailjs.send(SERVICE_ID, TEMPLATE_ID, {
         from_name: form.name,
-        from_email: form.email,
+        reply_to: form.email,
         message: form.message,
         budget: form.budget,
       }, PUBLIC_KEY);
-    } catch {
-      // Already saved to localStorage — treat as sent
+      setStatus('success');
+    } catch (err) {
+      console.error('EmailJS error status:', err?.status);
+      console.error('EmailJS error text:', err?.text);
+      setStatus('error');
     }
-
-    setStatus('success');
   };
 
   const inputBase =
@@ -135,6 +198,8 @@ export default function ContactForm() {
     <AnimatePresence mode="wait">
       {status === 'success' ? (
         <SuccessState key="success" />
+      ) : status === 'error' ? (
+        <ErrorState key="error" onRetry={() => setStatus('idle')} />
       ) : (
         <motion.form
           key="form"
@@ -194,10 +259,18 @@ export default function ContactForm() {
               className={fieldClass('budget')}
             >
               <option value="">Select a range</option>
-              <option value="Under $5k">Under $5k</option>
-              <option value="$5k–$20k">$5k–$20k</option>
-              <option value="$20k+">$20k+</option>
-              <option value="Let's talk">Let&apos;s talk</option>
+              <optgroup label="USD">
+                <option value="Under $5k">Under $5k</option>
+                <option value="$5k–$20k">$5k–$20k</option>
+                <option value="$20k+">$20k+</option>
+              </optgroup>
+              <optgroup label="INR">
+                <option value="Under ₹1L">Under ₹1L</option>
+                <option value="₹1L–₹5L">₹1L–₹5L</option>
+                <option value="₹5L–₹20L">₹5L–₹20L</option>
+                <option value="₹20L+">₹20L+</option>
+              </optgroup>
+              <option value="Let's talk">Let&apos;s talk / not sure</option>
             </select>
             {touched.budget && errors.budget && (
               <p className="mt-1 text-xs text-red-500">{errors.budget}</p>

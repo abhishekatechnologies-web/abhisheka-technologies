@@ -1,5 +1,15 @@
 'use client';
 
+/**
+ * ReadingProgress — fixed 2px Electric Blue progress bar at the top of the viewport.
+ *
+ * Tracks scroll position as a percentage of total scrollable height.
+ * Passive scroll listener keeps the main thread unblocked.
+ * Used on case study detail pages to give readers a sense of how far through they are.
+ *
+ * Renders above the NavBar (z-[60]) with an accessible progressbar role.
+ */
+
 import { useEffect, useState } from 'react';
 
 export default function ReadingProgress() {

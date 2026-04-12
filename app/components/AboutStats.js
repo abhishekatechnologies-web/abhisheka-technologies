@@ -1,5 +1,17 @@
 'use client';
 
+/**
+ * AboutStats — 2×2 grid of animated stat cards.
+ *
+ * Each card runs a count-up animation (ease-out cubic via requestAnimationFrame)
+ * that starts when the grid enters the viewport. Cards are staggered by 80ms
+ * each so they don't all fire simultaneously.
+ *
+ * useCountUp: custom hook that drives the number from 0 → target over `duration`ms.
+ * StatCard:   individual card; hover swaps its border to Electric Blue via inline style
+ *             (Tailwind can't target arbitrary hover colour reliably in all versions).
+ */
+
 import { useEffect, useRef, useState } from 'react';
 import { useInView } from 'framer-motion';
 
