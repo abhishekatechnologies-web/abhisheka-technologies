@@ -1,5 +1,6 @@
 import './globals.css';
 import MotionProvider from '@/app/components/MotionProvider';
+import PageLoader from '@/app/components/PageLoader';
 
 export const metadata = {
   title: 'Abhisheka Technologies — Tech Consulting',
@@ -26,7 +27,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body><MotionProvider>{children}</MotionProvider></body>
+      <body><MotionProvider><PageLoader>{children}</PageLoader></MotionProvider></body>
     </html>
   );
 }
