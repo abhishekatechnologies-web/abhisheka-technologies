@@ -1,101 +1,240 @@
-import Image from "next/image";
+import Link from 'next/link';
+import NavBar from '@/app/components/NavBar';
+import ContactForm from '@/app/components/ContactForm';
+import ServicesSection from '@/app/components/ServicesSection';
+import HeroClient from '@/app/components/HeroClient';
+import AboutStats from '@/app/components/AboutStats';
+import CaseStudyCards from '@/app/components/CaseStudyCards';
+import { Reveal, StaggerReveal, StaggerItem } from '@/app/components/ScrollReveal';
 
-export default function Home() {
+// ─── Hero Section ────────────────────────────────────────────────────────────
+function HeroSection() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <section
+      id="hero"
+      className="relative flex flex-col items-center justify-center min-h-screen text-center px-6"
+      style={{ backgroundColor: '#171A20' }}
+    >
+      <HeroClient />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+      {/* Animated scroll indicator */}
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+        <span className="text-xs tracking-widest uppercase" style={{ color: '#5C5E62' }}>
+          Scroll
+        </span>
+        <svg
+          width="16"
+          height="24"
+          viewBox="0 0 16 24"
+          fill="none"
+          className="animate-bounce-slow"
+        >
+          <path
+            d="M8 0v20M1 13l7 7 7-7"
+            stroke="#5C5E62"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </div>
+    </section>
+  );
+}
+
+// ─── About Section ───────────────────────────────────────────────────────────
+function AboutSection() {
+  return (
+    <section id="about" className="py-24 px-6" style={{ backgroundColor: '#F4F4F4' }}>
+      <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+        {/* Text */}
+        <Reveal>
+          <p className="text-xs uppercase tracking-widest mb-4" style={{ color: '#5C5E62' }}>
+            About
+          </p>
+          <h2
+            className="font-medium mb-6 leading-tight"
+            style={{ fontSize: 'clamp(28px, 4vw, 40px)', color: '#171A20' }}
           >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            A curious technologist,
+            <br />not just a developer.
+          </h2>
+          <div className="space-y-4 text-base leading-relaxed" style={{ color: '#393C41' }}>
+            <p>
+              I&apos;ve shipped production software across mobile, backend, cloud, and AI — from
+              native Android and iOS apps to enterprise headless commerce platforms serving
+              customers in 50+ countries. The technology has always been secondary to the business
+              problem it was solving.
+            </p>
+            <p>
+              What I do is help organisations find the clearest path forward. That sometimes means
+              building the product from scratch. More often it means asking better questions,
+              cutting scope, and making sure the thing that gets built is the thing that was
+              actually needed.
+            </p>
+            <p>
+              I work with seed-stage startups making their first architecture decisions, SMEs
+              modernising systems that have outgrown their original design, and growth-stage
+              companies that need a steady hand on engineering direction without hiring a
+              full-time CTO.
+            </p>
+          </div>
+        </Reveal>
+
+        {/* Animated stat cards */}
+        <AboutStats />
+      </div>
+    </section>
+  );
+}
+
+// ─── Case Studies Section ─────────────────────────────────────────────────────
+function CaseStudiesSection() {
+  return (
+    <section id="work" className="py-24 px-6" style={{ backgroundColor: '#F4F4F4' }}>
+      <div className="max-w-6xl mx-auto">
+        <Reveal>
+          <p className="text-xs uppercase tracking-widest mb-4" style={{ color: '#5C5E62' }}>
+            Work
+          </p>
+          <h2
+            className="font-medium mb-14 leading-tight"
+            style={{ fontSize: 'clamp(28px, 4vw, 40px)', color: '#171A20' }}
           >
-            Read our docs
+            Selected work.
+          </h2>
+        </Reveal>
+        <CaseStudyCards />
+      </div>
+    </section>
+  );
+}
+
+// ─── Contact Section ──────────────────────────────────────────────────────────
+function ContactSection() {
+  return (
+    <section id="contact" className="bg-white py-24 px-6">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+        <Reveal>
+          <p className="text-xs uppercase tracking-widest mb-4" style={{ color: '#5C5E62' }}>
+            Contact
+          </p>
+          <h2
+            className="font-medium mb-6 leading-tight"
+            style={{ fontSize: 'clamp(28px, 4vw, 40px)', color: '#171A20' }}
+          >
+            Let&apos;s work together.
+          </h2>
+          <p className="text-base leading-relaxed mb-6" style={{ color: '#5C5E62' }}>
+            I&apos;m available for consulting engagements on a project or retainer basis. Whether
+            you&apos;re building something new, untangling something broken, or trying to make a
+            clearer technology decision — get in touch.
+          </p>
+          <p className="text-sm leading-relaxed mb-8" style={{ color: '#5C5E62' }}>
+            I also work with clients through{' '}
+            <a
+              href="https://www.upwork.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline transition-opacity hover:opacity-70"
+              style={{ color: '#393C41' }}
+            >
+              Upwork
+            </a>{' '}
+            and{' '}
+            <a
+              href="https://www.fiverr.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline transition-opacity hover:opacity-70"
+              style={{ color: '#393C41' }}
+            >
+              Fiverr
+            </a>{' '}
+            for well-scoped engagements.
+          </p>
+          <a
+            href="mailto:avi.kr16@gmail.com"
+            className="text-sm transition-colors duration-300 hover:text-[#2d58c8]"
+            style={{ color: '#3E6AE1' }}
+          >
+            avi.kr16@gmail.com
           </a>
+        </Reveal>
+
+        <Reveal delay={0.1}>
+          <ContactForm />
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+// ─── Footer ───────────────────────────────────────────────────────────────────
+function Footer() {
+  const links = [
+    { label: 'Upwork', href: 'https://www.upwork.com' },
+    { label: 'Fiverr', href: 'https://www.fiverr.com' },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/abhishek-kumar' },
+    { label: 'GitHub', href: 'https://github.com/avi-kr' },
+  ];
+
+  return (
+    <footer style={{ backgroundColor: '#171A20' }} className="py-14 px-6">
+      <div className="max-w-6xl mx-auto">
+        <div className="flex flex-col md:flex-row justify-between items-start gap-8 mb-10">
+          <div>
+            <p className="font-medium text-base mb-1" style={{ color: '#FFFFFF' }}>
+              Abhisheka Technologies
+            </p>
+            <p className="text-sm" style={{ color: '#5C5E62' }}>
+              Building what matters.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-6">
+            {links.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm transition-colors duration-300 hover:text-white"
+                style={{ color: '#9E9E9E' }}
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
         </div>
+        <div
+          className="flex flex-col sm:flex-row justify-between items-center gap-2 pt-6"
+          style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}
+        >
+          <p className="text-xs" style={{ color: '#5C5E62' }}>
+            &copy; 2024 Abhisheka Technologies
+          </p>
+          <p className="text-xs" style={{ color: '#5C5E62' }}>
+            Crafted with intent.
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+// ─── Page ─────────────────────────────────────────────────────────────────────
+export default function HomePage() {
+  return (
+    <>
+      <NavBar />
+      <main>
+        <HeroSection />
+        <AboutSection />
+        <ServicesSection />
+        <CaseStudiesSection />
+        <ContactSection />
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      <Footer />
+    </>
   );
 }
