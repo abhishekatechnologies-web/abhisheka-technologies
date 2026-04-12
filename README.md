@@ -8,7 +8,7 @@ Built as a showcase of modern Next.js 14 patterns: App Router, SSG, server/clien
 
 ## Live Site
 
-**[abhisheka.tech](https://abhisheka.tech)**
+**[abhisheka-technologies.vercel.app](https://abhisheka-technologies.vercel.app)**
 
 ---
 

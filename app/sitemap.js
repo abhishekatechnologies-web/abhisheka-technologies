@@ -1,5 +1,5 @@
 export default function sitemap() {
-  const base = 'https://abhisheka.tech';
+  const base = 'https://abhisheka-technologies.vercel.app';
   const now = new Date();
 
   return [

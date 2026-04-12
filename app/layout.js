@@ -12,7 +12,7 @@ export const metadata = {
     description:
       'Technology consulting for startups and SMEs. Strategy, product development, AI integration, and technical leadership.',
     type: 'website',
-    url: 'https://abhisheka.tech',
+    url: 'https://abhisheka-technologies.vercel.app',
   },
   twitter: {
     card: 'summary_large_image',
