@@ -12,7 +12,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 
 const navLinks = ['About', 'Services', 'Work', 'Contact'];
 
@@ -86,17 +86,17 @@ export default function NavBar() {
             aria-label={menuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={menuOpen}
           >
-            <motion.span
+            <m.span
               animate={menuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
               transition={{ duration: 0.25 }}
               className="block w-5 h-[1.5px] bg-current origin-center"
             />
-            <motion.span
+            <m.span
               animate={menuOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
               transition={{ duration: 0.2 }}
               className="block w-5 h-[1.5px] bg-current"
             />
-            <motion.span
+            <m.span
               animate={menuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
               transition={{ duration: 0.25 }}
               className="block w-5 h-[1.5px] bg-current origin-center"
@@ -110,7 +110,7 @@ export default function NavBar() {
         {menuOpen && (
           <>
             {/* Backdrop */}
-            <motion.div
+            <m.div
               key="backdrop"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -121,7 +121,7 @@ export default function NavBar() {
             />
 
             {/* Drawer */}
-            <motion.div
+            <m.div
               key="drawer"
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
@@ -131,7 +131,7 @@ export default function NavBar() {
             >
               <div className="flex flex-col gap-1 pt-4">
                 {navLinks.map((item, i) => (
-                  <motion.div
+                  <m.div
                     key={item}
                     initial={{ opacity: 0, x: -12 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -144,9 +144,9 @@ export default function NavBar() {
                     >
                       {item}
                     </Link>
-                  </motion.div>
+                  </m.div>
                 ))}
-                <motion.div
+                <m.div
                   initial={{ opacity: 0, x: -12 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: navLinks.length * 0.06, duration: 0.2 }}
@@ -160,9 +160,9 @@ export default function NavBar() {
                   >
                     Hire me
                   </Link>
-                </motion.div>
+                </m.div>
               </div>
-            </motion.div>
+            </m.div>
           </>
         )}
       </AnimatePresence>

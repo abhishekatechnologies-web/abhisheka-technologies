@@ -1,10 +1,10 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { motion, useInView, useAnimation } from 'framer-motion';
+import { m, useInView, useAnimation } from 'framer-motion';
 
 /**
- * Wraps children in a motion.div that fades + slides up when scrolled into view.
+ * Wraps children in a m.div that fades + slides up when scrolled into view.
  * Respects prefers-reduced-motion automatically via Framer Motion.
  */
 export function Reveal({ children, delay = 0, className = '' }) {
@@ -17,7 +17,7 @@ export function Reveal({ children, delay = 0, className = '' }) {
   }, [isInView, controls]);
 
   return (
-    <motion.div
+    <m.div
       ref={ref}
       className={className}
       initial="hidden"
@@ -28,7 +28,7 @@ export function Reveal({ children, delay = 0, className = '' }) {
       }}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -40,7 +40,7 @@ export function StaggerReveal({ children, className = '', stagger = 0.1 }) {
   const isInView = useInView(ref, { once: true, margin: '-60px 0px' });
 
   return (
-    <motion.div
+    <m.div
       ref={ref}
       className={className}
       initial="hidden"
@@ -51,7 +51,7 @@ export function StaggerReveal({ children, className = '', stagger = 0.1 }) {
       }}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -60,7 +60,7 @@ export function StaggerReveal({ children, className = '', stagger = 0.1 }) {
  */
 export function StaggerItem({ children, className = '' }) {
   return (
-    <motion.div
+    <m.div
       className={className}
       variants={{
         hidden: { opacity: 0, y: 20 },
@@ -68,6 +68,6 @@ export function StaggerItem({ children, className = '' }) {
       }}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }

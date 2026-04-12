@@ -17,7 +17,7 @@
  */
 
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import emailjs from '@emailjs/browser';
 
 const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
@@ -57,7 +57,7 @@ function Spinner() {
 
 function SuccessState() {
   return (
-    <motion.div
+    <m.div
       key="success"
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
@@ -65,7 +65,7 @@ function SuccessState() {
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
       className="flex flex-col items-start gap-4 py-6"
     >
-      <motion.div
+      <m.div
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 0.1, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
@@ -75,7 +75,7 @@ function SuccessState() {
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
           <path d="M4 10l4.5 4.5 7.5-9" stroke="#3E6AE1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
-      </motion.div>
+      </m.div>
       <div>
         <p className="text-base font-medium mb-1" style={{ color: '#171A20' }}>
           Message sent.
@@ -84,13 +84,13 @@ function SuccessState() {
           Thanks for reaching out. I&apos;ll get back to you within one business day.
         </p>
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 
 function ErrorState({ onRetry }) {
   return (
-    <motion.div
+    <m.div
       key="error"
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
@@ -130,7 +130,7 @@ function ErrorState({ onRetry }) {
           Try again →
         </button>
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -201,7 +201,7 @@ export default function ContactForm() {
       ) : status === 'error' ? (
         <ErrorState key="error" onRetry={() => setStatus('idle')} />
       ) : (
-        <motion.form
+        <m.form
           key="form"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, y: -8 }}
@@ -312,7 +312,7 @@ export default function ContactForm() {
               )}
             </button>
           </div>
-        </motion.form>
+        </m.form>
       )}
     </AnimatePresence>
   );

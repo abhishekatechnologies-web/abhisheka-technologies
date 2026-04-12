@@ -7,18 +7,19 @@
  * the browser. Uses a single shared `variants` map with a `custom` delay
  * prop to stagger: label → headline → sub-copy → CTAs.
  *
+ * Uses `m` (not `motion`) so LazyMotion tree-shaking applies.
  * The parent HeroSection supplies the dark background and scroll indicator.
  */
 
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 
 const variants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 16 },
   visible: (delay = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1], delay },
+    transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1], delay },
   }),
 };
 
@@ -26,8 +27,8 @@ export default function HeroClient() {
   return (
     <div className="relative z-10 flex flex-col items-center text-center max-w-3xl mx-auto">
       {/* Label */}
-      <motion.p
-        custom={0.1}
+      <m.p
+        custom={0}
         initial="hidden"
         animate="visible"
         variants={variants}
@@ -35,11 +36,11 @@ export default function HeroClient() {
         style={{ color: '#5C5E62' }}
       >
         Tech consulting · Strategy · Execution
-      </motion.p>
+      </m.p>
 
       {/* Headline */}
-      <motion.h1
-        custom={0.25}
+      <m.h1
+        custom={0.07}
         initial="hidden"
         animate="visible"
         variants={variants}
@@ -49,11 +50,11 @@ export default function HeroClient() {
         Technology that
         <br />
         actually helps.
-      </motion.h1>
+      </m.h1>
 
       {/* Sub-copy */}
-      <motion.p
-        custom={0.4}
+      <m.p
+        custom={0.14}
         initial="hidden"
         animate="visible"
         variants={variants}
@@ -62,11 +63,11 @@ export default function HeroClient() {
       >
         I help startups and growing businesses make clearer technology decisions,
         build the right things, and avoid the expensive mistakes.
-      </motion.p>
+      </m.p>
 
       {/* CTAs */}
-      <motion.div
-        custom={0.55}
+      <m.div
+        custom={0.2}
         initial="hidden"
         animate="visible"
         variants={variants}
@@ -86,7 +87,7 @@ export default function HeroClient() {
         >
           See my work
         </Link>
-      </motion.div>
+      </m.div>
     </div>
   );
 }

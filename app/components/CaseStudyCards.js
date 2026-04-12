@@ -15,7 +15,7 @@
  */
 
 import Link from 'next/link';
-import { motion, useInView } from 'framer-motion';
+import { m, useInView } from 'framer-motion';
 import { useRef } from 'react';
 
 const caseStudies = [
@@ -95,7 +95,7 @@ const caseStudies = [
 
 function CaseStudyCard({ study, index }) {
   return (
-    <motion.div
+    <m.div
       variants={{
         hidden: { opacity: 0, y: 32 },
         visible: {
@@ -173,7 +173,7 @@ function CaseStudyCard({ study, index }) {
           </div>
         </div>
       </Link>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -182,7 +182,7 @@ export default function CaseStudyCards() {
   const isInView = useInView(ref, { once: true, margin: '-60px 0px' });
 
   return (
-    <motion.div
+    <m.div
       ref={ref}
       className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
       initial="hidden"
@@ -191,6 +191,6 @@ export default function CaseStudyCards() {
       {caseStudies.map((study, i) => (
         <CaseStudyCard key={study.slug} study={study} index={i} />
       ))}
-    </motion.div>
+    </m.div>
   );
 }
