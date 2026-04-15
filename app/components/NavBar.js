@@ -12,6 +12,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { m, AnimatePresence } from 'framer-motion';
 
 const navLinks = ['About', 'Services', 'Work', 'Contact'];
@@ -44,15 +45,22 @@ export default function NavBar() {
         }`}
       >
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          {/* Wordmark */}
-          <Link
-            href="/"
-            onClick={closeMenu}
-            className={`text-base font-medium tracking-widest transition-colors duration-300 ${
-              scrolled || menuOpen ? 'text-[#171A20]' : 'text-white'
-            }`}
-          >
-            A&bull;T
+          {/* Wordmark — logo on white bg, text on dark hero */}
+          <Link href="/" onClick={closeMenu} className="flex items-center h-8">
+            {scrolled || menuOpen ? (
+              <Image
+                src="/images/logo-blue.png"
+                alt="Abhisheka Technologies"
+                width={140}
+                height={40}
+                className="h-8 w-auto object-contain"
+                priority
+              />
+            ) : (
+              <span className="text-base font-medium tracking-widest text-white">
+                A&bull;T
+              </span>
+            )}
           </Link>
 
           {/* Desktop links */}

@@ -9,6 +9,7 @@
  */
 
 import Link from 'next/link';
+import Image from 'next/image';
 import NavBar from '@/app/components/NavBar';
 import ContactForm from '@/app/components/ContactForm';
 import ServicesSection from '@/app/components/ServicesSection';
@@ -91,8 +92,35 @@ function AboutSection() {
           </div>
         </Reveal>
 
-        {/* Animated stat cards */}
-        <AboutStats />
+        {/* Right column — app previews + stats */}
+        <div className="flex flex-col gap-8">
+          {/* Real app screenshots */}
+          <Reveal delay={0.1}>
+            <div className="flex gap-4 items-end">
+              <div className="flex-1 rounded-2xl overflow-hidden shadow-none" style={{ border: '1px solid #EEEEEE' }}>
+                <Image
+                  src="/images/app-01.png"
+                  alt="Mobile app onboarding screen built by Abhisheka Technologies"
+                  width={200}
+                  height={360}
+                  className="w-full object-cover"
+                />
+              </div>
+              <div className="flex-1 rounded-2xl overflow-hidden translate-y-6" style={{ border: '1px solid #EEEEEE' }}>
+                <Image
+                  src="/images/app-02.png"
+                  alt="Mobile app UI screen built by Abhisheka Technologies"
+                  width={200}
+                  height={360}
+                  className="w-full object-cover"
+                />
+              </div>
+            </div>
+          </Reveal>
+
+          {/* Animated stat cards */}
+          <AboutStats />
+        </div>
       </div>
     </section>
   );

@@ -15,6 +15,7 @@
  */
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { m, useInView } from 'framer-motion';
 import { useRef } from 'react';
 
@@ -29,6 +30,7 @@ const caseStudies = [
     outcome: 'Active engagement',
     live: false,
     featured: true,
+    image: '/images/cs/aafes.gif',
   },
   {
     number: '02',
@@ -39,6 +41,7 @@ const caseStudies = [
     tags: ['Flutter', 'Firebase', 'Serverless'],
     outcome: 'Live product',
     live: true,
+    image: '/images/cs/healthcare.jpg',
   },
   {
     number: '03',
@@ -49,6 +52,7 @@ const caseStudies = [
     tags: ['Flutter', 'Firebase', 'Serverless'],
     outcome: 'Live product',
     live: true,
+    image: '/images/cs/healthcare.jpg',
   },
   {
     number: '04',
@@ -59,6 +63,7 @@ const caseStudies = [
     tags: ['Next.js', 'Vercel', 'FinTech'],
     outcome: 'Live product',
     live: true,
+    image: '/images/cs/finance.jpg',
   },
   {
     number: '05',
@@ -69,17 +74,18 @@ const caseStudies = [
     tags: ['Python', 'CrewAI', 'Groq', 'Multi-Agent'],
     outcome: 'Personal project',
     live: false,
+    image: '/images/cs/jobs.gif',
   },
   {
     number: '06',
     slug: 'microservices-on-gcp',
     title: 'Microservices on GCP',
-
     client: 'SaaS Backend Migration',
     tagline: 'Node.js monolith extracted into independently deployable Cloud Run services with Pub/Sub event bus, Java Spring Boot for high-throughput domains, Terraform IaC.',
     tags: ['Node.js', 'Java', 'Spring Boot', 'GCP'],
     outcome: '5 services extracted',
     live: false,
+    image: '/images/cs/gcp.jpg',
   },
   {
     number: '07',
@@ -90,6 +96,7 @@ const caseStudies = [
     tags: ['Flutter Web', 'Firebase', 'Serverless'],
     outcome: 'Live product',
     live: true,
+    image: '/images/cs/retail.jpg',
   },
 ];
 
@@ -108,11 +115,26 @@ function CaseStudyCard({ study, index }) {
     >
       <Link href={`/case-studies/${study.slug}`} className="block group flex-1">
         <div
-          className="rounded-xl p-7 h-full flex flex-col transition-colors duration-[330ms]"
+          className="rounded-xl overflow-hidden h-full flex flex-col transition-colors duration-[330ms]"
           style={{ border: '1px solid #EEEEEE' }}
           onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#3E6AE1'; }}
           onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#EEEEEE'; }}
         >
+          {/* Thumbnail */}
+          {study.image && (
+            <div className="relative w-full overflow-hidden" style={{ height: '180px' }}>
+              <Image
+                src={study.image}
+                alt={study.title}
+                fill
+                className="object-cover transition-transform duration-[500ms] group-hover:scale-105"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                unoptimized={study.image.endsWith('.gif')}
+              />
+            </div>
+          )}
+
+          <div className="p-7 flex flex-col flex-1">
           {/* Number + status */}
           <div className="flex items-start justify-between mb-5">
             <span
@@ -170,6 +192,7 @@ function CaseStudyCard({ study, index }) {
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
               <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
+          </div>
           </div>
         </div>
       </Link>
