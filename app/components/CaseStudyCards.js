@@ -15,7 +15,6 @@
  */
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { m, useInView } from 'framer-motion';
 import { useRef } from 'react';
 
@@ -115,25 +114,11 @@ function CaseStudyCard({ study, index }) {
     >
       <Link href={`/case-studies/${study.slug}`} className="block group flex-1">
         <div
-          className="rounded-xl overflow-hidden h-full flex flex-col transition-colors duration-[330ms]"
+          className="rounded-xl h-full flex flex-col transition-colors duration-[330ms]"
           style={{ border: '1px solid #EEEEEE' }}
           onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#3E6AE1'; }}
           onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#EEEEEE'; }}
         >
-          {/* Thumbnail */}
-          {study.image && (
-            <div className="relative w-full overflow-hidden" style={{ height: '180px' }}>
-              <Image
-                src={study.image}
-                alt={study.title}
-                fill
-                className="object-cover transition-transform duration-[500ms] group-hover:scale-105"
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                unoptimized={study.image?.endsWith('.gif')}
-              />
-            </div>
-          )}
-
           <div className="p-7 flex flex-col flex-1">
           {/* Number + status */}
           <div className="flex items-start justify-between mb-5">
