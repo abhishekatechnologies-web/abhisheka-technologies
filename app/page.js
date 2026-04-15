@@ -26,26 +26,10 @@ function HeroSection() {
       className="relative flex flex-col items-center justify-center min-h-screen text-center px-6"
       style={{ backgroundColor: '#171A20' }}
     >
-      {/* Background photo */}
-      <Image
-        src="/images/hero-bg.jpg"
-        alt=""
-        fill
-        priority
-        quality={90}
-        className="object-cover object-center"
-      />
-      {/* Carbon Dark tint — 78% opacity so photo reads clearly but text stays crisp */}
-      <div
-        className="absolute inset-0"
-        style={{ backgroundColor: 'rgba(23, 26, 32, 0.78)' }}
-        aria-hidden="true"
-      />
-
       <HeroClient />
 
       {/* Animated scroll indicator */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10">
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
         <span className="text-xs tracking-widest uppercase" style={{ color: '#5C5E62' }}>
           Scroll
         </span>
