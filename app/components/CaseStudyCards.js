@@ -52,7 +52,7 @@ const caseStudies = [
     tags: ['Flutter', 'Firebase', 'Serverless'],
     outcome: 'Live product',
     live: true,
-    image: '/images/cs/healthcare.jpg',
+    image: '/images/cs/nari-care.jpg',
   },
   {
     number: '04',
@@ -96,7 +96,7 @@ const caseStudies = [
     tags: ['Flutter Web', 'Firebase', 'Serverless'],
     outcome: 'Live product',
     live: true,
-    image: '/images/cs/retail.jpg',
+    image: '/images/cs/retail.gif',
   },
 ];
 
@@ -129,7 +129,7 @@ function CaseStudyCard({ study, index }) {
                 fill
                 className="object-cover transition-transform duration-[500ms] group-hover:scale-105"
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                unoptimized={study.image.endsWith('.gif')}
+                unoptimized={study.image?.endsWith('.gif')}
               />
             </div>
           )}
