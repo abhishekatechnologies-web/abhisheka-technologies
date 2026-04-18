@@ -10,6 +10,7 @@
  */
 
 import Link from 'next/link';
+import Image from 'next/image';
 import NavBar from '@/app/components/NavBar';
 
 export const metadata = {
@@ -42,6 +43,10 @@ const products = [
     priceNote: 'Per clinic location. Annual billing saves 20%.',
     liveUrl: 'https://bright-smile-35523.web.app/',
     caseStudySlug: 'bright-smile',
+    previews: {
+      landing: '/images/products/bright-smile-landing.png',
+      dashboard: '/images/products/bright-smile-dashboard.png',
+    },
     color: '#F0FDF4',
     accent: '#16A34A',
     accentLight: '#DCFCE7',
@@ -71,6 +76,10 @@ const products = [
     priceNote: 'Per clinic location. Annual billing saves 20%.',
     liveUrl: 'https://nari-care.web.app/',
     caseStudySlug: 'nari-care',
+    previews: {
+      landing: '/images/products/nari-care-landing.png',
+      dashboard: '/images/products/nari-care-dashboard.png',
+    },
     color: '#FFF1F2',
     accent: '#E11D48',
     accentLight: '#FFE4E6',
@@ -100,6 +109,10 @@ const products = [
     priceNote: 'Per business location. Annual billing saves 20%.',
     liveUrl: 'https://bs-food-beverage.web.app/',
     caseStudySlug: 'bs-food-beverage',
+    previews: {
+      landing: '/images/products/bs-operations-landing.png',
+      dashboard: '/images/products/bs-operations-dashboard.png',
+    },
     color: '#FFF7ED',
     accent: '#EA580C',
     accentLight: '#FFEDD5',
@@ -164,6 +177,46 @@ function ProductCard({ product }) {
         >
           {product.number}
         </span>
+      </div>
+
+      {/* Preview images — public website + admin dashboard */}
+      <div
+        className="grid grid-cols-1 md:grid-cols-2 gap-px"
+        style={{ backgroundColor: '#EEEEEE' }}
+      >
+        {[
+          { src: product.previews.landing, label: 'Public website' },
+          { src: product.previews.dashboard, label: 'Admin dashboard' },
+        ].map((preview) => (
+          <figure
+            key={preview.label}
+            className="bg-white flex flex-col"
+          >
+            <div
+              className="relative w-full overflow-hidden"
+              style={{ aspectRatio: '16 / 10', backgroundColor: '#F4F4F4' }}
+            >
+              <Image
+                src={preview.src}
+                alt={`${product.name} — ${preview.label}`}
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover object-top"
+              />
+            </div>
+            <figcaption
+              className="text-xs px-4 py-2.5 flex items-center gap-2"
+              style={{ color: '#5C5E62', borderTop: '1px solid #EEEEEE' }}
+            >
+              <span
+                className="w-1.5 h-1.5 rounded-full shrink-0"
+                style={{ backgroundColor: product.accent }}
+                aria-hidden="true"
+              />
+              {preview.label}
+            </figcaption>
+          </figure>
+        ))}
       </div>
 
       {/* Body */}
