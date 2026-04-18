@@ -23,13 +23,31 @@ function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative flex flex-col items-center justify-center min-h-screen text-center px-6"
+      className="relative flex flex-col items-center justify-center min-h-screen text-center px-6 overflow-hidden"
       style={{ backgroundColor: '#171A20' }}
     >
+      {/* Background photo */}
+      <Image
+        src="/images/hero-bg.jpg"
+        alt=""
+        fill
+        priority
+        quality={85}
+        className="object-cover object-center scale-105"
+      />
+      {/* Dark tint — gradient so bottom feels grounded, top stays airy */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: 'linear-gradient(160deg, rgba(23,26,32,0.72) 0%, rgba(23,26,32,0.88) 100%)',
+        }}
+        aria-hidden="true"
+      />
+
       <HeroClient />
 
       {/* Animated scroll indicator */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10">
         <span className="text-xs tracking-widest uppercase" style={{ color: '#5C5E62' }}>
           Scroll
         </span>
@@ -92,35 +110,10 @@ function AboutSection() {
           </div>
         </Reveal>
 
-        {/* Right column — app previews + stats */}
-        <div className="flex flex-col gap-8">
-          {/* Real app screenshots */}
-          <Reveal delay={0.1}>
-            <div className="flex gap-4 items-end">
-              <div className="flex-1 rounded-2xl overflow-hidden shadow-none" style={{ border: '1px solid #EEEEEE' }}>
-                <Image
-                  src="/images/app-01.png"
-                  alt="Mobile app onboarding screen built by Abhisheka Technologies"
-                  width={200}
-                  height={360}
-                  className="w-full object-cover"
-                />
-              </div>
-              <div className="flex-1 rounded-2xl overflow-hidden translate-y-6" style={{ border: '1px solid #EEEEEE' }}>
-                <Image
-                  src="/images/app-02.png"
-                  alt="Mobile app UI screen built by Abhisheka Technologies"
-                  width={200}
-                  height={360}
-                  className="w-full object-cover"
-                />
-              </div>
-            </div>
-          </Reveal>
-
-          {/* Animated stat cards */}
+        {/* Right column — stat cards */}
+        <Reveal delay={0.1}>
           <AboutStats />
-        </div>
+        </Reveal>
       </div>
     </section>
   );
