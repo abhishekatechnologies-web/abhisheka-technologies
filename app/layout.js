@@ -6,6 +6,9 @@ export const metadata = {
   title: 'Abhisheka Technologies — Tech Consulting',
   description:
     'Technology consulting for startups and SMEs. Strategy, product development, AI integration, and technical leadership.',
+  verification: {
+    google: 'tJh81xmv11aCgdJkVs_yfJalhgDwf6iZKMI3e8AeU4A',
+  },
   keywords:
     'tech consulting, technology strategy, AI integration, product development, fractional CTO, Upwork, Fiverr',
   openGraph: {
