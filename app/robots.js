@@ -7,6 +7,6 @@ export default function robots() {
         disallow: '/admin/',
       },
     ],
-    sitemap: 'https://abhisheka.tech/sitemap.xml',
+    sitemap: 'https://abhisheka-technologies.vercel.app/sitemap.xml',
   };
 }
