@@ -15,7 +15,13 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { m, AnimatePresence } from 'framer-motion';
 
-const navLinks = ['About', 'Services', 'Work', 'Contact'];
+const navLinks = [
+  { label: 'About',    href: '/#about' },
+  { label: 'Services', href: '/#services' },
+  { label: 'Products', href: '/products' },
+  { label: 'Work',     href: '/#work' },
+  { label: 'Contact',  href: '/#contact' },
+];
 
 export default function NavBar() {
   const [scrolled, setScrolled] = useState(false);
@@ -65,15 +71,15 @@ export default function NavBar() {
 
           {/* Desktop links */}
           <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((item) => (
+            {navLinks.map(({ label, href }) => (
               <Link
-                key={item}
-                href={`/#${item.toLowerCase()}`}
+                key={label}
+                href={href}
                 className={`text-sm font-medium transition-colors duration-300 hover:text-[#3E6AE1] ${
                   scrolled ? 'text-[#393C41]' : 'text-white'
                 }`}
               >
-                {item}
+                {label}
               </Link>
             ))}
             <Link
@@ -138,19 +144,19 @@ export default function NavBar() {
               className="fixed top-16 left-0 right-0 z-40 bg-white border-b border-[#EEEEEE] px-6 pb-8"
             >
               <div className="flex flex-col gap-1 pt-4">
-                {navLinks.map((item, i) => (
+                {navLinks.map(({ label, href }, i) => (
                   <m.div
-                    key={item}
+                    key={label}
                     initial={{ opacity: 0, x: -12 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.06, duration: 0.2 }}
                   >
                     <Link
-                      href={`/#${item.toLowerCase()}`}
+                      href={href}
                       onClick={closeMenu}
                       className="block text-base font-medium text-[#393C41] py-3 border-b border-[#F4F4F4] hover:text-[#3E6AE1] transition-colors duration-200"
                     >
-                      {item}
+                      {label}
                     </Link>
                   </m.div>
                 ))}

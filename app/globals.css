@@ -47,6 +47,16 @@ body {
   }
 }
 
+/* Accent-border hover — uses --card-accent CSS variable set via inline style.
+   Allows server components to apply dynamic per-card hover colors without JS. */
+.accent-border-hover {
+  border: 1px solid transparent;
+  transition: border-color 330ms ease;
+}
+.accent-border-hover:hover {
+  border-color: var(--card-accent);
+}
+
 /* Smooth scrollbar (Webkit) */
 ::-webkit-scrollbar {
   width: 6px;

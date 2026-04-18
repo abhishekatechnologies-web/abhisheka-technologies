@@ -119,6 +119,100 @@ function AboutSection() {
   );
 }
 
+// ─── Products Teaser ──────────────────────────────────────────────────────────
+const PRODUCTS_PREVIEW = [
+  {
+    name: 'Bright Smile',
+    category: 'Dental Clinic Management',
+    tagline: 'Complete clinic management — appointments, charting, billing, GST invoices.',
+    color: '#F0FDF4',
+    accent: '#16A34A',
+    href: '/products#bright-smile',
+  },
+  {
+    name: 'NariCare',
+    category: 'OB-GYN Clinic Platform',
+    tagline: 'ANC tracking, IVF cycles, ultrasound reports — built for women\'s health.',
+    color: '#FFF1F2',
+    accent: '#E11D48',
+    href: '/products#nari-care',
+  },
+  {
+    name: 'BS Operations',
+    category: 'Inventory & Operations',
+    tagline: 'Real-time inventory and staff management — runs in the browser, no app needed.',
+    color: '#FFF7ED',
+    accent: '#EA580C',
+    href: '/products#bs-operations',
+  },
+];
+
+function ProductsTeaser() {
+  return (
+    <section id="products" className="py-24 px-6 bg-white">
+      <div className="max-w-6xl mx-auto">
+        <Reveal>
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
+            <div>
+              <p className="text-xs uppercase tracking-widest mb-4" style={{ color: '#5C5E62' }}>
+                Products
+              </p>
+              <h2
+                className="font-medium leading-tight"
+                style={{ fontSize: 'clamp(28px, 4vw, 40px)', color: '#171A20' }}
+              >
+                SaaS platforms, ready to deploy.
+              </h2>
+            </div>
+            <Link
+              href="/products"
+              className="text-sm font-medium transition-colors duration-[330ms] hover:text-[#3E6AE1] shrink-0"
+              style={{ color: '#5C5E62' }}
+            >
+              View all products →
+            </Link>
+          </div>
+        </Reveal>
+
+        <StaggerReveal className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {PRODUCTS_PREVIEW.map((p) => (
+            <StaggerItem key={p.name}>
+              <Link href={p.href} className="block group h-full">
+                <div
+                  className="rounded-xl p-6 h-full flex flex-col accent-border-hover"
+                  style={{ backgroundColor: p.color, '--card-accent': p.accent }}
+                >
+                  <span
+                    className="text-xs font-medium mb-3 inline-block"
+                    style={{ color: p.accent }}
+                  >
+                    {p.category}
+                  </span>
+                  <h3
+                    className="font-medium mb-2 text-base"
+                    style={{ color: '#171A20' }}
+                  >
+                    {p.name}
+                  </h3>
+                  <p className="text-sm leading-relaxed flex-1 mb-5" style={{ color: '#5C5E62' }}>
+                    {p.tagline}
+                  </p>
+                  <span
+                    className="text-xs font-medium transition-colors duration-[330ms]"
+                    style={{ color: p.accent }}
+                  >
+                    Learn more →
+                  </span>
+                </div>
+              </Link>
+            </StaggerItem>
+          ))}
+        </StaggerReveal>
+      </div>
+    </section>
+  );
+}
+
 // ─── Case Studies Section ─────────────────────────────────────────────────────
 function CaseStudiesSection() {
   return (
@@ -262,6 +356,7 @@ export default function HomePage() {
         <HeroSection />
         <AboutSection />
         <ServicesSection />
+        <ProductsTeaser />
         <CaseStudiesSection />
         <ContactSection />
       </main>
