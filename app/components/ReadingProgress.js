@@ -12,7 +12,7 @@
 
 import { useEffect, useState } from 'react';
 
-export default function ReadingProgress() {
+export default function ReadingProgress({ accentColor = '#3E6AE1' }) {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -41,7 +41,7 @@ export default function ReadingProgress() {
     >
       <div
         className="h-full transition-[width] duration-75 ease-out"
-        style={{ width: `${progress}%`, backgroundColor: '#3E6AE1' }}
+        style={{ width: `${progress}%`, backgroundColor: accentColor }}
       />
     </div>
   );

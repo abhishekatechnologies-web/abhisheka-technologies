@@ -2,6 +2,17 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import ReadingProgress from '@/app/components/ReadingProgress';
 
+// Matches the color/accent pairs in CaseStudyCards.js
+const STUDY_PALETTE = {
+  'aafes-shop-my-exchange': { color: '#EEF2FF', accent: '#4F46E5' },
+  'bright-smile':           { color: '#F0FDF4', accent: '#16A34A' },
+  'nari-care':              { color: '#FFF1F2', accent: '#E11D48' },
+  'algotrader-pro':         { color: '#FFFBEB', accent: '#D97706' },
+  'job-search-agent':       { color: '#F5F3FF', accent: '#7C3AED' },
+  'microservices-on-gcp':   { color: '#ECFEFF', accent: '#0891B2' },
+  'bs-food-beverage':       { color: '#FFF7ED', accent: '#EA580C' },
+};
+
 const caseStudies = {
   'bright-smile': {
     title: 'Bright Smile — Dental Clinic Platform',
@@ -175,9 +186,11 @@ export default function CaseStudyPage({ params }) {
   const study = caseStudies[params.slug];
   if (!study) notFound();
 
+  const { color, accent } = STUDY_PALETTE[params.slug] ?? { color: '#F4F4F4', accent: '#3E6AE1' };
+
   return (
     <div style={{ backgroundColor: '#FFFFFF', minHeight: '100vh' }}>
-      <ReadingProgress />
+      <ReadingProgress accentColor={accent} />
 
       {/* Breadcrumb / Back nav */}
       <div style={{ borderBottom: '1px solid #EEEEEE' }} className="px-6 py-4 sticky top-0 z-50 bg-white">
@@ -217,15 +230,15 @@ export default function CaseStudyPage({ params }) {
         </div>
       </div>
 
-      {/* Header */}
-      <header className="px-6 pt-16 pb-12">
+      {/* Header — tinted with the study's palette color */}
+      <header className="px-6 pt-16 pb-12" style={{ backgroundColor: color }}>
         <div className="max-w-3xl mx-auto">
           <div className="flex flex-wrap gap-2 mb-6">
             {study.tags.map((tag) => (
               <span
                 key={tag}
-                className="text-xs px-3 py-1 rounded-full"
-                style={{ backgroundColor: '#F4F4F4', color: '#5C5E62' }}
+                className="text-xs px-3 py-1 rounded-full font-medium"
+                style={{ backgroundColor: accent, color: '#FFFFFF' }}
               >
                 {tag}
               </span>

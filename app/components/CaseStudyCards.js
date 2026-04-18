@@ -30,6 +30,8 @@ const caseStudies = [
     live: false,
     featured: true,
     image: '/images/cs/aafes.gif',
+    color: '#EEF2FF', // light indigo — military / enterprise
+    accent: '#4F46E5',
   },
   {
     number: '02',
@@ -41,6 +43,8 @@ const caseStudies = [
     outcome: 'Live product',
     live: true,
     image: '/images/cs/healthcare.jpg',
+    color: '#F0FDF4', // light green — health / clinic
+    accent: '#16A34A',
   },
   {
     number: '03',
@@ -52,6 +56,8 @@ const caseStudies = [
     outcome: 'Live product',
     live: true,
     image: '/images/cs/nari-care.jpg',
+    color: '#FFF1F2', // light rose — women's health
+    accent: '#E11D48',
   },
   {
     number: '04',
@@ -63,6 +69,8 @@ const caseStudies = [
     outcome: 'Live product',
     live: true,
     image: '/images/cs/finance.jpg',
+    color: '#FFFBEB', // light amber — finance / trading
+    accent: '#D97706',
   },
   {
     number: '05',
@@ -74,6 +82,8 @@ const caseStudies = [
     outcome: 'Personal project',
     live: false,
     image: '/images/cs/jobs.gif',
+    color: '#F5F3FF', // light violet — AI / automation
+    accent: '#7C3AED',
   },
   {
     number: '06',
@@ -85,6 +95,8 @@ const caseStudies = [
     outcome: '5 services extracted',
     live: false,
     image: '/images/cs/gcp.jpg',
+    color: '#ECFEFF', // light cyan — cloud / infrastructure
+    accent: '#0891B2',
   },
   {
     number: '07',
@@ -96,6 +108,8 @@ const caseStudies = [
     outcome: 'Live product',
     live: true,
     image: '/images/cs/retail.gif',
+    color: '#FFF7ED', // light orange — retail / food
+    accent: '#EA580C',
   },
 ];
 
@@ -114,17 +128,17 @@ function CaseStudyCard({ study, index }) {
     >
       <Link href={`/case-studies/${study.slug}`} className="block group flex-1">
         <div
-          className="rounded-xl h-full flex flex-col transition-colors duration-[330ms]"
-          style={{ border: '1px solid #EEEEEE' }}
-          onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#3E6AE1'; }}
-          onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#EEEEEE'; }}
+          className="rounded-xl h-full flex flex-col transition-all duration-[330ms]"
+          style={{ backgroundColor: study.color, border: `1px solid transparent` }}
+          onMouseEnter={(e) => { e.currentTarget.style.borderColor = study.accent; }}
+          onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'transparent'; }}
         >
           <div className="p-7 flex flex-col flex-1">
           {/* Number + status */}
           <div className="flex items-start justify-between mb-5">
             <span
-              className="font-medium text-sm transition-colors duration-[330ms] group-hover:text-[#3E6AE1]"
-              style={{ color: '#D0D1D2' }}
+              className="font-medium text-sm transition-colors duration-[330ms]"
+              style={{ color: study.accent, opacity: 0.5 }}
             >
               {study.number}
             </span>
@@ -141,7 +155,7 @@ function CaseStudyCard({ study, index }) {
 
           {/* Title + client */}
           <h3
-            className="font-medium mb-1 transition-colors duration-[330ms] group-hover:text-[#3E6AE1]"
+            className="font-medium mb-1"
             style={{ fontSize: '18px', color: '#171A20' }}
           >
             {study.title}
@@ -161,7 +175,7 @@ function CaseStudyCard({ study, index }) {
               <span
                 key={tag}
                 className="text-xs px-2 py-0.5 rounded"
-                style={{ border: '1px solid #EEEEEE', color: '#5C5E62' }}
+                style={{ backgroundColor: 'rgba(0,0,0,0.06)', color: '#5C5E62' }}
               >
                 {tag}
               </span>
@@ -170,8 +184,8 @@ function CaseStudyCard({ study, index }) {
 
           {/* Arrow */}
           <div
-            className="flex items-center gap-1.5 text-xs font-medium transition-colors duration-[330ms] group-hover:text-[#3E6AE1]"
-            style={{ color: '#8E8E8E' }}
+            className="flex items-center gap-1.5 text-xs font-medium transition-colors duration-[330ms]"
+            style={{ color: study.accent }}
           >
             <span>Read case study</span>
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
