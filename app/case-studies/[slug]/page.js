@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import ReadingProgress from '@/app/components/ReadingProgress';
 
+const SITE_URL = 'https://abhisheka-technologies.vercel.app';
+
 // Matches the color/accent pairs in CaseStudyCards.js
 const STUDY_PALETTE = {
   'aafes-shop-my-exchange': { color: '#EEF2FF', accent: '#4F46E5' },
@@ -176,9 +178,46 @@ export function generateStaticParams() {
 export function generateMetadata({ params }) {
   const study = caseStudies[params.slug];
   if (!study) return { title: 'Not Found' };
+  const url = `${SITE_URL}/case-studies/${params.slug}`;
   return {
-    title: `${study.title} — Abhisheka Technologies`,
+    title: study.title,
     description: study.tagline,
+    alternates: { canonical: url },
+    openGraph: {
+      title: `${study.title} | Abhisheka Technologies`,
+      description: study.tagline,
+      url,
+      type: 'article',
+    },
+  };
+}
+
+function buildCaseStudySchema(slug, study) {
+  const url = `${SITE_URL}/case-studies/${slug}`;
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Article',
+        '@id': `${url}#article`,
+        headline: study.title,
+        description: study.tagline,
+        url,
+        author: { '@id': `${SITE_URL}#abhishek-kumar` },
+        publisher: { '@id': `${SITE_URL}#organization` },
+        keywords: study.tags,
+        mainEntityOfPage: url,
+        articleSection: 'Case Study',
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+          { '@type': 'ListItem', position: 2, name: 'Work', item: `${SITE_URL}/#work` },
+          { '@type': 'ListItem', position: 3, name: study.title, item: url },
+        ],
+      },
+    ],
   };
 }
 
@@ -190,6 +229,12 @@ export default function CaseStudyPage({ params }) {
 
   return (
     <div style={{ backgroundColor: '#FFFFFF', minHeight: '100vh' }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(buildCaseStudySchema(params.slug, study)),
+        }}
+      />
       <ReadingProgress accentColor={accent} />
 
       {/* Breadcrumb / Back nav */}

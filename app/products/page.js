@@ -13,10 +13,32 @@ import Link from 'next/link';
 import Image from 'next/image';
 import NavBar from '@/app/components/NavBar';
 
+const SITE_URL = 'https://abhisheka-technologies.vercel.app';
+
 export const metadata = {
-  title: 'Products — Abhisheka Technologies',
+  title: 'Products — Clinic & Business SaaS to License or White-Label',
   description:
-    'Production-ready SaaS platforms for Indian clinics and businesses. Bright Smile (dental), NariCare (OB-GYN), and BS Operations (inventory). License, white-label, or customise.',
+    'Production SaaS for Indian clinics and businesses. Bright Smile (dental clinic), NariCare (OB-GYN), and BS Operations (inventory). License as-is, rebrand, or commission a custom version.',
+  keywords: [
+    'dental clinic management software India',
+    'OB-GYN clinic software',
+    'gynaecology clinic SaaS',
+    'inventory management SaaS India',
+    'white label clinic software',
+    'Bright Smile dental software',
+    'NariCare OB-GYN platform',
+    'BS Operations inventory',
+    'Firebase SaaS India',
+    'license clinic software India',
+  ],
+  alternates: { canonical: `${SITE_URL}/products` },
+  openGraph: {
+    title: 'Products — Clinic & Business SaaS | Abhisheka Technologies',
+    description:
+      'Three live SaaS platforms ready to license or white-label. Built for Indian clinics and small businesses.',
+    url: `${SITE_URL}/products`,
+    type: 'website',
+  },
 };
 
 // ─── Product data ──────────────────────────────────────────────────────────────
@@ -304,10 +326,47 @@ function ProductCard({ product }) {
   );
 }
 
+// ─── JSON-LD ─────────────────────────────────────────────────────────────────
+// Each product gets its own SoftwareApplication entry — eligible for product
+// rich results in Google search (price, rating, screenshot).
+function buildProductSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@graph': products.map((p) => ({
+      '@type': 'SoftwareApplication',
+      '@id': `${SITE_URL}/products#${p.id}`,
+      name: p.name,
+      applicationCategory: 'BusinessApplication',
+      applicationSubCategory: p.category,
+      operatingSystem: 'Web, Android, iOS',
+      url: p.liveUrl,
+      description: p.description,
+      featureList: p.features,
+      screenshot: [
+        `${SITE_URL}${p.previews.landing}`,
+        `${SITE_URL}${p.previews.dashboard}`,
+      ],
+      provider: { '@id': `${SITE_URL}#organization` },
+      offers: {
+        '@type': 'Offer',
+        price: p.price.replace(/[^\d]/g, ''),
+        priceCurrency: 'INR',
+        priceValidUntil: '2027-12-31',
+        availability: 'https://schema.org/InStock',
+        url: `${SITE_URL}/products#${p.id}`,
+      },
+    })),
+  };
+}
+
 // ─── Page ──────────────────────────────────────────────────────────────────────
 export default function ProductsPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(buildProductSchema()) }}
+      />
       <NavBar />
       <main>
         {/* Hero */}
